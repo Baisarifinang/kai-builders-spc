@@ -33,6 +33,10 @@ jobs:
           rm -rf _site/extracted
           rm -f _site/KAI_Builders_SPC_Website_Domain_Style_2026.zip
 
+      - name: Update contact email
+        run: |
+          find _site -type f \( -name '*.html' -o -name '*.js' -o -name '*.json' -o -name '*.xml' -o -name '*.txt' \) -print0 | xargs -0 sed -i 's/kaibuilders\.spc@gmail\.com/md@kaibuildersspc.com/g'
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
