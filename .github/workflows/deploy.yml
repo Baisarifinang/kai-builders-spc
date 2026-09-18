@@ -23,12 +23,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
+      - name: Prepare website files
+        run: |
+          rm -rf _site
+          mkdir -p _site
+          unzip -q KAI_Builders_SPC_Website_Domain_Style_2026.zip -d _site/extracted
+          cp -a _site/extracted/KAI_Builders_SPC_Website/. _site/
+          rm -rf _site/extracted
+          rm -f _site/KAI_Builders_SPC_Website_Domain_Style_2026.zip
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: '.'
+          path: '_site'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
